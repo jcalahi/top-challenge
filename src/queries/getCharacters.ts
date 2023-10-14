@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const getCharacters = gql`
-  query Characters {
-    characters {
+  query Characters($name: String) {
+    characters(filter: { name: $name }) {
       info {
         count
         prev
