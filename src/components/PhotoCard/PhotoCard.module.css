@@ -1,0 +1,19 @@
+.photoCard {
+  position: relative;
+}
+
+.photoCard:hover .overlay {
+  top: 30%;
+}
+
+.overlay {
+  background: #fff;
+  padding: 0 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 80%;
+  transition: all 0.2s ease-out;
+  transition-delay: 0.3s;
+}

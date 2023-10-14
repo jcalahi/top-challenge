@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import Masonry from '@mui/lab/Masonry';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import PhotoCard from '../../../../components/PhotoCard';
 import useAppStore from '../../../../store/useAppStore';
-import { getCharacters } from '../../../../queries/getCharacters';
-import { Character, CharactersQueryVariables } from '../../../../gql/graphql';
+import { getCharacters } from '../../../../gql/queries/getCharacters';
+import {
+  Character,
+  CharactersQueryVariables,
+} from '../../../../gql/types/graphql';
 
 type CharacterData = {
   characters: {
@@ -42,27 +41,7 @@ function SearchResults(): JSX.Element {
 
   const showResults = () => {
     return data.characters.results.map((result: Character, idx: number) => {
-      return (
-        <Card
-          key={`${result.name}-${idx}`}
-          sx={{
-            ':hover': { boxShadow: 20 },
-          }}
-        >
-          <CardMedia sx={{ minHeight: 250 }} image={result.image!} />
-          <CardContent>
-            <Typography variant="h6" component="div">
-              {result.name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {result.species}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions>
-        </Card>
-      );
+      return <PhotoCard key={idx} {...result} />;
     });
   };
 
