@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import Masonry from '@mui/lab/Masonry';
 import Card from '@mui/material/Card';
@@ -8,40 +9,47 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import useAppStore from '../../../../store/useAppStore';
 import { getCharacters } from '../../../../queries/getCharacters';
-import { Character } from '../../../../gql/graphql';
+import { Character, CharactersQueryVariables } from '../../../../gql/graphql';
 
 type CharacterData = {
   characters: {
+    info: Record<string, string | null>;
     results: Character[];
   };
 };
 
-type CharacterVars = {
-  name: string;
-};
-
 function SearchResults(): JSX.Element {
-  const { searchTerm } = useAppStore();
-  const { data, loading } = useQuery<CharacterData, CharacterVars>(
+  const { page, searchTerm, setPageCount } = useAppStore();
+  const { data, loading } = useQuery<CharacterData, CharactersQueryVariables>(
     getCharacters,
     {
-      variables: { name: searchTerm },
+      variables: { name: searchTerm, page },
     }
   );
 
-  if (loading || !data) return <p>Loading...</p>;
+  useEffect(() => {
+    if (data) {
+      setPageCount(Number(data.characters.info.count));
+    }
+  }, [data, setPageCount]);
+
+  if (loading || !data)
+    return (
+      <Typography variant="h6" component="div">
+        Loading...
+      </Typography>
+    );
 
   const showResults = () => {
     return data.characters.results.map((result: Character, idx: number) => {
       return (
         <Card
+          key={`${result.name}-${idx}`}
           sx={{
-            maxWidth: 500,
             ':hover': { boxShadow: 20 },
           }}
-          key={`${result.name}-${idx}`}
         >
-          <CardMedia sx={{ minHeight: 200 }} image={result.image!} />
+          <CardMedia sx={{ minHeight: 250 }} image={result.image!} />
           <CardContent>
             <Typography variant="h6" component="div">
               {result.name}

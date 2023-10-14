@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  query Characters($name: String) {\n    characters(filter: { name: $name }) {\n      info {\n        count\n        prev\n        next\n      }\n      results {\n        name\n        species\n        status\n        type\n        gender\n        origin {\n          name\n        }\n        location {\n          name\n        }\n        image\n      }\n    }\n  }\n": types.CharactersDocument,
+    "\n  query Characters($name: String, $page: Int) {\n    characters(page: $page, filter: { name: $name }) {\n      info {\n        count\n        prev\n        next\n      }\n      results {\n        name\n        species\n        status\n        type\n        gender\n        origin {\n          name\n        }\n        location {\n          name\n        }\n        image\n      }\n    }\n  }\n": types.CharactersDocument,
 };
 
 /**
@@ -33,7 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query Characters($name: String) {\n    characters(filter: { name: $name }) {\n      info {\n        count\n        prev\n        next\n      }\n      results {\n        name\n        species\n        status\n        type\n        gender\n        origin {\n          name\n        }\n        location {\n          name\n        }\n        image\n      }\n    }\n  }\n"): (typeof documents)["\n  query Characters($name: String) {\n    characters(filter: { name: $name }) {\n      info {\n        count\n        prev\n        next\n      }\n      results {\n        name\n        species\n        status\n        type\n        gender\n        origin {\n          name\n        }\n        location {\n          name\n        }\n        image\n      }\n    }\n  }\n"];
+export function graphql(source: "\n  query Characters($name: String, $page: Int) {\n    characters(page: $page, filter: { name: $name }) {\n      info {\n        count\n        prev\n        next\n      }\n      results {\n        name\n        species\n        status\n        type\n        gender\n        origin {\n          name\n        }\n        location {\n          name\n        }\n        image\n      }\n    }\n  }\n"): (typeof documents)["\n  query Characters($name: String, $page: Int) {\n    characters(page: $page, filter: { name: $name }) {\n      info {\n        count\n        prev\n        next\n      }\n      results {\n        name\n        species\n        status\n        type\n        gender\n        origin {\n          name\n        }\n        location {\n          name\n        }\n        image\n      }\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

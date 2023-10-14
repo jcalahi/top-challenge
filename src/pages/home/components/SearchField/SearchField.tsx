@@ -11,7 +11,6 @@ function SearchField(): JSX.Element {
   const handleBtnClick = () => {
     if (inputRef?.current?.value) {
       onSearch(inputRef.current.value);
-      inputRef.current.value = '';
     }
   };
 
