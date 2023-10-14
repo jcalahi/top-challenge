@@ -4,7 +4,7 @@ import Masonry from '@mui/lab/Masonry';
 import Typography from '@mui/material/Typography';
 import PhotoCard from '../../../../components/PhotoCard';
 import useAppStore from '../../../../store/useAppStore';
-import { getCharacters } from '../../../../gql/queries/getCharacters';
+import { GET_CHARACTERS } from '../../../../gql/queries/getCharacters';
 import {
   Character,
   CharactersQueryVariables,
@@ -20,7 +20,7 @@ type CharacterData = {
 function SearchResults(): JSX.Element {
   const { page, searchTerm, setPageCount } = useAppStore();
   const { data, loading } = useQuery<CharacterData, CharactersQueryVariables>(
-    getCharacters,
+    GET_CHARACTERS,
     {
       variables: { name: searchTerm, page },
     }
@@ -28,7 +28,6 @@ function SearchResults(): JSX.Element {
 
   useEffect(() => {
     if (data) {
-      console.log(data.characters.results);
       setPageCount(Number(data.characters.info.count));
     }
   }, [data, setPageCount]);

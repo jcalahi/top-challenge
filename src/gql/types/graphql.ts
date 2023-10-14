@@ -135,7 +135,7 @@ export type Location = {
   /** The name of the location. */
   name?: Maybe<Scalars['String']['output']>;
   /** List of characters who have been last seen in the location. */
-  residents: Array<Maybe<Character>>;
+  residents?: Array<Maybe<Character>>;
   /** The type of the location. */
   type?: Maybe<Scalars['String']['output']>;
 };
