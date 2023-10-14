@@ -39,6 +39,14 @@ function SearchResults(): JSX.Element {
       </Typography>
     );
 
+  if (!loading && data.characters.results.length === 0) {
+    return (
+      <Typography variant="h6" component="div">
+        {`No results for "${searchTerm}" were found.`}
+      </Typography>
+    );
+  }
+
   const showResults = () => {
     return data.characters.results.map((result: Character, idx: number) => {
       return <PhotoCard key={idx} {...result} />;
