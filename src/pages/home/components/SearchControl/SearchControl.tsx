@@ -4,7 +4,7 @@ import useAppStore from '../../../../store/useAppStore';
 function SearchControl(): JSX.Element | null {
   const { onPaginate, pageCount } = useAppStore();
 
-  const handleChange = (e: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_e: React.ChangeEvent<unknown>, value: number) => {
     onPaginate(value);
   };
 
