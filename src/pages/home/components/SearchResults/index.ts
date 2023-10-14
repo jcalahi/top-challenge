@@ -1,1 +1,1 @@
-export { default } from './SearchResults.tsx';
+export { default } from './SearchResults';

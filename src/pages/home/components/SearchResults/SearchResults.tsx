@@ -28,6 +28,7 @@ function SearchResults(): JSX.Element {
 
   useEffect(() => {
     if (data) {
+      console.log(data.characters.results);
       setPageCount(Number(data.characters.info.count));
     }
   }, [data, setPageCount]);
@@ -54,7 +55,7 @@ function SearchResults(): JSX.Element {
   };
 
   return (
-    <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 7 }} spacing={2}>
+    <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5 }} spacing={2}>
       {showResults()}
     </Masonry>
   );

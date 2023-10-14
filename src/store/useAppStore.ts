@@ -12,7 +12,7 @@ type Store = {
 const useAppStore = create<Store>((set) => ({
   searchTerm: '',
   page: 1,
-  pageCount: 5,
+  pageCount: 10,
   setPageCount: (count) =>
     set(() => ({
       pageCount: Math.round(count / 20),
