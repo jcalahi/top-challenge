@@ -8,15 +8,14 @@ function Home(): JSX.Element {
   return (
     <Container maxWidth="xl">
       <Stack
-        direction="row"
+        direction={{ sm: 'column', lg: 'row' }}
         alignItems="center"
         justifyContent="space-between"
-        mt={2}
       >
-        <Box sx={{ maxWidth: 'sm', width: '100%' }}>
+        <Box sx={{ maxWidth: 'sm', width: '100%' }} mt={2}>
           <SearchField />
         </Box>
-        <Box>
+        <Box mt={2}>
           <SearchControl />
         </Box>
       </Stack>

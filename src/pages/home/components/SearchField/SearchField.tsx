@@ -14,6 +14,12 @@ function SearchField(): JSX.Element {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleBtnClick();
+    }
+  };
+
   return (
     <Stack spacing={2} direction="row">
       <TextField
@@ -21,11 +27,15 @@ function SearchField(): JSX.Element {
         inputRef={inputRef}
         variant="outlined"
         label="Name"
-        placeholder="Type Rick and Morty characters name"
+        placeholder="Type Rick and Morty characters name and press Enter"
         size="small"
+        onKeyDown={handleKeyDown}
       />
-      <Button variant="contained" onClick={handleBtnClick}>
+      <Button variant="outlined" onClick={handleBtnClick}>
         Search
+      </Button>
+      <Button variant="outlined" color="error" onClick={() => onSearch('')}>
+        Clear
       </Button>
     </Stack>
   );

@@ -20,9 +20,9 @@ describe('SearchField', () => {
     expect(screen.getByLabelText('Name')).toBeInTheDocument();
   });
 
-  it('should render a button', () => {
+  it('should render a search button', () => {
     render(<SearchField />);
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /search/i })).toBeInTheDocument();
   });
 
   it('should pass the text input value on button click', async () => {
@@ -30,5 +30,14 @@ describe('SearchField', () => {
     const { result } = renderHook(() => useMockStore());
     act(() => result.current.onSearch('Hello'));
     expect(result.current.searchTerm).toEqual('Hello');
+  });
+
+  it('can reset the input value', async () => {
+    render(<SearchField />);
+    const { result } = renderHook(() => useMockStore());
+    act(() => result.current.onSearch('Hello'));
+    expect(result.current.searchTerm).toEqual('Hello');
+    act(() => result.current.onSearch(''));
+    expect(result.current.searchTerm).toEqual('');
   });
 });
